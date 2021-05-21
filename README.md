@@ -34,8 +34,13 @@ cd timesfromer_trtfp16_error
 # download pretrained weights from TimeSformer official repo
 wget https://www.dropbox.com/s/g5t24we9gl5yk88/TimeSformer_divST_8x32_224_K400.pyth
 
-# run the script to build 2 models in fp32 and fp16, get the outputs and do comparison
-source run.sh
+# build 2 models in fp32 and fp16, get the outputs and do comparison
+python conversions.py TimeSformer_divST_8x32_224_K400.pyth test_inputs.p result_fp32.p
+
+python conversions.py TimeSformer_divST_8x32_224_K400.pyth test_inputs.p result_fp16.p --fp16_mode
+
+# do comparison
+python compare.py
 ```
 
 The normalized difference between FP32 and FP16 entries should be printed on the screen 
